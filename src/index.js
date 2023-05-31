@@ -13,9 +13,7 @@ const setupServer = () => {
   app.listen(PORT, () => {
     console.log(`Server is running at Port ${PORT}`);
     if (process.env.DB_SYNC) {
-      db.sequelize.sync({ alter: true }).then(() => {
-        console.log("Database is synced");
-      });
+      db.sequelize.sync({ alter: true })
     }
   });
 };

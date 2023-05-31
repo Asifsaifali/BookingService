@@ -2,10 +2,10 @@ const { ValidationError, AppError } = require("../utils/errors/index");
 const { Booking } = require("../models/index");
 
 class BookingService {
-  async create(data) {
+  async createBooking(data) {
     try {
-      const book = await Booking.create(data);
-      return book;
+       const data=await Booking.create(data);
+       return data;
     } catch (error) {
       if (error.name === "SequelizeValidtionError") {
         throw new ValidationError(error);
