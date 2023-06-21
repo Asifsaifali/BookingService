@@ -36,6 +36,20 @@ class BookingRepository {
       );
     }
   }
+  async get(bookingId){
+    try {
+        const response=await Booking.findByPk(bookingId)
+        return response;
+    } catch (error) {
+        console.log(error)
+        throw new AppError(
+            "RepositoryError",
+            "Cannot Get booking details",
+            "There was some issue geting the booking details, please try again later",
+            StatusCodes.INTERNAL_SERVER_ERROR
+          );
+    }
+  }
 }
 
 module.exports = BookingRepository;

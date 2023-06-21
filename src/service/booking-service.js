@@ -14,7 +14,6 @@ class BookingService {
       const flightId = data.flightId;
       const flightURL = `${FLIGHT_SEARCH_PATH}/api/v1/flights/${flightId} `;
       const response = await axios.get(flightURL);
-      //   console.log(response.data.data);
       const flightData = response.data.data;
       const priceOftheFlight = flightData.price;
       if (data.noOfSeats > flightData.totalSeat) {
@@ -36,6 +35,16 @@ class BookingService {
         { status: "BOOKED" }
       );
       return finalBooking;
+    } catch (error) {
+      console.log(error);
+      throw new ServiceError(error);
+    }
+  }
+
+  async getbookingDetails(bookingId) {
+    try {
+      const response = await this.bookingRepository.get(bookingId);
+      return response;
     } catch (error) {
       console.log(error);
       throw new ServiceError(error);
