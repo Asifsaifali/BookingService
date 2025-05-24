@@ -9,8 +9,16 @@ class BookingController {
   constructor() {}
   async sendMessageToQueue(req, res) {
     const channel = await createChannel();
-    const data = { message: "Success" };
-    publishMessage(channel, REMINDER_BINDING_KEY, JSON.stringify(data));
+    const payload = { 
+      data:{
+        subject:'This is Notify queue',
+        content:'this is my fourth queue',
+        recepientEmail:'asif123@gmail.com',
+        notificationTime:' 2023-07-09 12:21:15'
+      },
+      service:'CREATE_TICKET',
+    };
+    publishMessage(channel, REMINDER_BINDING_KEY, JSON.stringify(payload));
     return res.status(200).json({
       message: "Successfully published the event",
     });
@@ -27,7 +35,6 @@ class BookingController {
         err: {},
       });
     } catch (error) {
-      console.log(error);
       return res.status(error.statusCode).json({
         success: false,
         message: error.message,

@@ -9,3 +9,4 @@ module.exports={
     MESSAGE_BROKER_URL:process.env.MESSAGE_BROKER_URL,
     EXCHANGE_NAME:process.env.EXCHANGE_NAME,
 }
+ 
